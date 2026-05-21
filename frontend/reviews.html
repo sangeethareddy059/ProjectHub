@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Reviews - ProjectHub</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <nav class="navbar">
+
+        <div class="logo-section">
+
+            <img src="assets/logo.png" alt="logo">
+
+            <div class="logo-text">
+                <h1>ProjectHub</h1>
+            </div>
+
+        </div>
+
+        <ul class="nav-links">
+
+            <li><a href="index.html">Home</a></li>
+
+            <li><a href="about.html">About</a></li>
+
+            <li><a href="projects.html">Projects</a></li>
+
+            <li><a href="technologies.html">Latest Technologies</a></li>
+
+            <li><a href="gallery.html">Gallery</a></li>
+
+            <li><a href="reviews.html">Reviews</a></li>
+
+            <li><a href="contact.html">Contact Us</a></li>
+
+        </ul>
+
+    </nav>
+
+    <section class="review-page">
+
+        <h1>Student Reviews</h1>
+
+        <div class="review-form-container">
+
+            <form id="reviewForm">
+
+                <input
+                    type="text"
+                    id="studentName"
+                    placeholder="Student Name"
+                    required
+                >
+
+                <input
+                    type="text"
+                    id="projectDomain"
+                    placeholder="Project Domain"
+                    required
+                >
+
+                <select id="rating" required>
+
+                    <option value="">
+                        Select Rating
+                    </option>
+
+                    <option value="5">
+                        ⭐⭐⭐⭐⭐ Excellent
+                    </option>
+
+                    <option value="4">
+                        ⭐⭐⭐⭐ Very Good
+                    </option>
+
+                    <option value="3">
+                        ⭐⭐⭐ Good
+                    </option>
+
+                    <option value="2">
+                        ⭐⭐ Average
+                    </option>
+
+                    <option value="1">
+                        ⭐ Poor
+                    </option>
+
+                </select>
+
+                <textarea
+                    id="reviewText"
+                    placeholder="Share your experience about the project and our work..."
+                    required
+                ></textarea>
+
+                <textarea
+                    id="improvementText"
+                    placeholder="What should we improve?"
+                    required
+                ></textarea>
+
+                <button type="submit">
+                    Submit Review
+                </button>
+
+            </form>
+
+        </div>
+
+        <div class="reviews-container" id="reviewsContainer">
+
+        </div>
+
+    </section>
+
+    <script>
+
+        const reviewForm = document.getElementById("reviewForm");
+
+        const reviewsContainer =
+            document.getElementById("reviewsContainer");
+
+        reviewForm.addEventListener("submit", function(e){
+
+            e.preventDefault();
+
+            const studentName =
+                document.getElementById("studentName").value;
+
+            const projectDomain =
+                document.getElementById("projectDomain").value;
+
+            const rating =
+                document.getElementById("rating").value;
+
+            const reviewText =
+                document.getElementById("reviewText").value;
+
+            const improvementText =
+                document.getElementById("improvementText").value;
+
+            const currentDate =
+                new Date().toLocaleDateString();
+
+            let stars = "";
+
+            for(let i = 0; i < rating; i++){
+
+                stars += "⭐";
+
+            }
+
+            const reviewCard = `
+
+                <div class="review-card">
+
+                    <div class="review-top">
+
+                        <h2>${studentName}</h2>
+
+                        <span>${currentDate}</span>
+
+                    </div>
+
+                    <h3>${projectDomain}</h3>
+
+                    <div class="stars">
+                        ${stars}
+                    </div>
+
+                    <p class="review-message">
+                        ${reviewText}
+                    </p>
+
+                    <div class="improvement-box">
+
+                        <h4>
+                            Improvements Suggested
+                        </h4>
+
+                        <p>
+                            ${improvementText}
+                        </p>
+
+                    </div>
+
+                </div>
+
+            `;
+
+            reviewsContainer.innerHTML =
+                reviewCard + reviewsContainer.innerHTML;
+
+            reviewForm.reset();
+
+        });
+
+    </script>
+
+</body>
+
+</html>
