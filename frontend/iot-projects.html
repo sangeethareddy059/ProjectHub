@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>IoT Projects</title>
+
+<link rel="stylesheet"
+      href="style.css">
+
+</head>
+
+<body>
+
+<section class="projects-section">
+
+    <h1 class="projects-title">
+
+        IoT Projects
+
+    </h1>
+
+    <div class="projects-container"
+         id="iotProjects">
+
+    </div>
+
+</section>
+
+<script>
+
+async function loadIoTProjects(){
+
+    const response = await fetch(
+
+        "http://127.0.0.1:8000/api/projects/"
+
+    );
+
+    const projects = await response.json();
+
+    const container =
+    document.getElementById(
+        "iotProjects"
+    );
+
+    container.innerHTML = "";
+
+    let serialNumber = 1;
+
+
+    projects.forEach(project => {
+
+        if(project.domain === "IoT"){
+
+            container.innerHTML += `
+
+            <div class="project-card">
+
+                ${project.image
+                ? `<img src="${project.image}">`
+                : ""}
+
+                <div class="project-content">
+
+                    <h2>
+
+                        ${serialNumber}.
+                        ${project.title}
+
+                    </h2>
+
+                    <p class="tech-text">
+
+                        ${project.technologies}
+
+                    </p>
+
+                    ${project.description
+                    ? `<p>${project.description}</p>`
+                    : ""}
+
+                </div>
+
+            </div>
+
+            `;
+
+            serialNumber++;
+
+        }
+
+    });
+
+}
+
+loadIoTProjects();
+
+</script>
+
+<div class="auth-modal"
+        id="authModal">
+
+        <!-- REGISTER -->
+
+        <form class="auth-form"
+            id="registerForm"
+            onsubmit="registerUser(event)">
+
+            <h1>Register</h1>
+
+            <input
+                type="text"
+                id="registerName"
+                placeholder="Enter Name"
+                required
+            >
+
+            <input
+                type="email"
+                id="registerEmail"
+                placeholder="Enter Gmail"
+                required
+            >
+
+            <input
+                type="password"
+                id="registerPassword"
+                placeholder="Create Password"
+                required
+            >
+
+            <p class="password-text">
+
+                Password must contain:
+                1 capital letter,
+                1 special character,
+                1 number,
+                minimum 6 characters
+
+            </p>
+
+            <button type="submit">
+
+                Register
+
+            </button>
+
+            <p>
+
+                Already Registered?
+
+                <span onclick="openLogin()">
+
+                    Login
+
+                </span>
+
+            </p>
+
+        </form>
+
+
+
+        <!-- LOGIN -->
+
+        <form class="auth-form"
+            id="loginForm"
+            onsubmit="loginUser(event)">
+
+            <h1>Login</h1>
+
+            <input
+                type="email"
+                id="loginEmail"
+                placeholder="Enter Gmail"
+                required
+            >
+
+            <input
+                type="password"
+                id="loginPassword"
+                placeholder="Enter Password"
+                required
+            >
+
+            <button type="submit">
+
+                Login
+
+            </button>
+
+            <p>
+
+                Forgot Password?
+
+                <span onclick="openForgot()">
+
+                    Reset
+
+                </span>
+
+            </p>
+
+            <p>
+
+                New User?
+
+                <span onclick="openRegister()">
+
+                    Register
+
+                </span>
+
+            </p>
+
+        </form>
+
+
+
+        <!-- FORGOT PASSWORD -->
+
+        <form class="auth-form"
+            id="forgotForm"
+            onsubmit="forgotPassword(event)">
+
+            <h1>Reset Password</h1>
+
+            <input
+                type="email"
+                id="forgotEmail"
+                placeholder="Enter Gmail"
+                required
+            >
+
+            <input
+                type="password"
+                id="forgotNewPassword"
+                placeholder="Enter New Password"
+                required
+            >
+
+            <p class="password-text">
+
+                Password must contain:
+                1 capital letter,
+                1 special character,
+                1 number,
+                minimum 6 characters
+
+            </p>
+
+            <button type="submit" id="changePasswordBtn">
+
+                Change Password
+
+            </button>
+
+        </form>
+
+    </div>
+
+
+
+    <script src="auth.js"></script>
+
+</body>
+
+</html>

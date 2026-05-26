@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Admin Dashboard</title>
+
+<link rel="stylesheet"
+      href="style.css">
+
+</head>
+
+<body>
+
+<div class="dashboard-container">
+
+    <!-- SIDEBAR -->
+
+    <div class="dashboard-sidebar">
+
+        <h1>
+
+            Admin Panel
+
+        </h1>
+
+        <button onclick="showAddProject()">
+
+            Add Project
+
+        </button>
+
+        <button onclick="loadProjects()">
+
+            View Projects
+
+        </button>
+
+        <button onclick="adminLogout()">
+
+            Logout
+
+        </button>
+
+    </div>
+
+
+
+    <!-- MAIN CONTENT -->
+
+    <div class="dashboard-content">
+
+        <!-- ADD PROJECT -->
+
+        <div id="addProjectSection">
+
+            <h2>
+
+                Add New Project
+
+            </h2>
+
+            <form
+            class="add-project-form"
+            onsubmit="addProject(event)">
+
+                <input
+                    type="text"
+                    id="projectTitle"
+                    placeholder="Project Title"
+                    required
+                >
+
+                <select
+                    id="projectDomain"
+                    required>
+
+                    <option value="">
+
+                        Select Domain
+
+                    </option>
+
+                    <option value="Embedded">
+
+                        Embedded
+
+                    </option>
+
+                    <option value="VLSI">
+
+                        VLSI
+
+                    </option>
+
+                    <option value="IOT">
+
+                        IOT
+
+                    </option>
+
+                    <option value="Software">
+
+                        Software
+
+                    </option>
+
+                </select>
+
+                <input
+                    type="text"
+                    id="projectTechnologies"
+                    placeholder="Technologies"
+                    required
+                >
+
+                <textarea
+                    id="projectDescription"
+                    placeholder="Project Description">
+
+                </textarea>
+
+                <button type="submit">
+
+                    Add Project
+
+                </button>
+
+            </form>
+
+        </div>
+
+
+
+        <!-- PROJECT LIST -->
+
+        <div id="projectsList">
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<script>
+
+const backendUrl =
+
+"http://127.0.0.1:8000/api/projects/";
+
+
+window.onload = function(){
+
+    const adminLoggedIn =
+
+    localStorage.getItem(
+        "adminLoggedIn"
+    );
+
+
+    if(adminLoggedIn !== "true"){
+
+        window.location.href =
+        "admin-login.html";
+
+    }
+
+}
+
+
+
+function showAddProject(){
+
+    document.getElementById(
+        "addProjectSection"
+    ).style.display =
+    "block";
+
+}
+
+
+
+async function addProject(e){
+
+    e.preventDefault();
+
+    const title =
+
+    document.getElementById(
+        "projectTitle"
+    ).value;
+
+
+    const domain =
+
+    document.getElementById(
+        "projectDomain"
+    ).value;
+
+
+    const technologies =
+
+    document.getElementById(
+        "projectTechnologies"
+    ).value;
+
+
+    const description =
+
+    document.getElementById(
+        "projectDescription"
+    ).value;
+
+
+    const response = await fetch(
+
+        backendUrl,
+
+        {
+
+            method:"POST",
+
+            headers:{
+                "Content-Type":
+                "application/json"
+            },
+
+            body:JSON.stringify({
+
+                title,
+                domain,
+                technologies,
+                description
+
+            })
+
+        }
+
+    );
+
+
+    const result =
+    await response.json();
+
+    alert(
+        "Project Added Successfully"
+    );
+
+    loadProjects();
+
+}
+
+
+
+async function loadProjects(){
+
+    const response = await fetch(
+
+        backendUrl
+
+    );
+
+    const projects =
+    await response.json();
+
+    const container =
+
+    document.getElementById(
+        "projectsList"
+    );
+
+    container.innerHTML = "";
+
+
+    projects.forEach(project => {
+
+        container.innerHTML += `
+
+        <div class="admin-project-card">
+
+            <h2>
+
+                ${project.title}
+
+            </h2>
+
+            <p>
+
+                ${project.domain}
+
+            </p>
+
+            <button
+            onclick="deleteProject(
+            ${project.id}
+            )">
+
+                Delete
+
+            </button>
+
+        </div>
+
+        `;
+
+    });
+
+}
+
+
+
+async function deleteProject(id){
+
+    await fetch(
+
+        backendUrl + id + "/",
+
+        {
+
+            method:"DELETE"
+
+        }
+
+    );
+
+    alert(
+        "Project Deleted Successfully"
+    );
+
+    loadProjects();
+
+}
+
+
+
+function adminLogout(){
+
+    localStorage.removeItem(
+        "adminLoggedIn"
+    );
+
+    alert(
+        "Admin Logout Successful"
+    );
+
+    window.location.href =
+    "admin-login.html";
+
+}
+
+</script>
+
+</body>
+
+</html>

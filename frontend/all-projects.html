@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>All Projects</title>
+
+<link rel="stylesheet"
+      href="style.css">
+
+</head>
+
+<body>
+
+<body>
+
+<body>
+
+<section class="projects-section">
+
+    <h1 class="projects-title">
+
+        Hardware Projects
+
+    </h1>
+
+
+    <h2 class="sub-title">
+
+        VLSI Projects
+
+    </h2>
+
+    <div class="projects-container"
+         id="vlsiProjects">
+
+    </div>
+
+
+    <h2 class="sub-title">
+
+        Embedded Projects
+
+    </h2>
+
+    <div class="projects-container"
+         id="embeddedProjects">
+
+    </div>
+
+
+    <h2 class="sub-title">
+
+        IoT Projects
+
+    </h2>
+
+    <div class="projects-container"
+         id="iotProjects">
+
+    </div>
+
+
+    <h1 class="projects-title">
+
+        Software Projects
+
+    </h1>
+
+    <div class="projects-container"
+         id="softwareProjects">
+
+    </div>
+
+</section>
+
+<script>
+
+async function loadProjects(){
+
+    const response = await fetch(
+
+        "http://127.0.0.1:8000/api/projects/"
+
+    );
+
+    const projects = await response.json();
+
+
+    const vlsiContainer =
+    document.getElementById(
+        "vlsiProjects"
+    );
+
+    const embeddedContainer =
+    document.getElementById(
+        "embeddedProjects"
+    );
+
+    const iotContainer =
+    document.getElementById(
+        "iotProjects"
+    );
+
+    const softwareContainer =
+    document.getElementById(
+        "softwareProjects"
+    );
+
+
+    projects.forEach(project => {
+
+        const card = `
+
+        <div class="project-card">
+
+            ${project.image
+            ? `<img src="${project.image}">`
+            : ""}
+
+            <div class="project-content">
+
+                <h2>
+                    ${project.title}
+                </h2>
+
+                <p class="tech-text">
+
+                    ${project.technologies}
+
+                </p>
+
+                ${project.description
+                ? `<p>${project.description}</p>`
+                : ""}
+
+            </div>
+
+        </div>
+
+        `;
+
+
+        if(project.domain === "VLSI"){
+
+            vlsiContainer.innerHTML +=
+            card;
+
+        }
+
+
+        else if(project.domain === "Embedded"){
+
+            embeddedContainer.innerHTML +=
+            card;
+
+        }
+
+
+        else if(project.domain === "IoT"){
+
+            iotContainer.innerHTML +=
+            card;
+
+        }
+
+
+        else if(project.domain === "Software"){
+
+            softwareContainer.innerHTML +=
+            card;
+
+        }
+
+    });
+
+}
+
+loadProjects();
+
+</script>
+
+</body>
+
+</html>

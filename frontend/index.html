@@ -14,119 +14,181 @@
 
 <body>
 
-    <nav class="navbar">
+        <nav class="navbar">
 
-        <div class="logo-section">
+        <div class="top-navbar">
 
-            <img src="assets/logo.png" alt="logo">
+            <div class="logo-section">
 
-            <div class="logo-text">
-                <h1>ProjectHub</h1>
+                <img src="assets/logo.png" alt="logo">
 
-                <div class="contact-info">
+                <div class="logo-text">
 
-                    <p>
-                        <i class="ri-phone-fill"></i>
-                        +91 9876543210
-                    </p>
+                    <h1>ProjectHub</h1>
 
-                    <p>
-                        <i class="ri-mail-fill"></i>
-                        projecthub@gmail.com
-                    </p>
+                    <div class="contact-info">
 
-                    <p>
-                        <i class="ri-instagram-fill"></i>
-                        @projecthub
-                    </p>
+                        <p>
+                            <i class="ri-phone-fill"></i>
+                            +91 9876543210
+                        </p>
 
-                    <p>
-                        <i class="ri-facebook-circle-fill"></i>
-                        ProjectHub
-                    </p>
+                        <p>
+                            <i class="ri-mail-fill"></i>
+                            projecthub@gmail.com
+                        </p>
 
-                    <p>
-                        <i class="ri-youtube-fill"></i>
-                        ProjectHub Channel
-                    </p>
+                        <p>
+                            <i class="ri-instagram-fill"></i>
+                            @projecthub
+                        </p>
 
-                </div>
+                        <p>
+                            <i class="ri-youtube-fill"></i>
+                            ProjectHub Channel
+                        </p>
 
-                <div class="address">
-
-                    <p>
-                        Hyderabad, Telangana, India
-                    </p>
+                    </div>
 
                 </div>
+
             </div>
 
         </div>
 
-        <ul class="nav-links">
-            <li><a href="#">Home</a></li>
-            <li><a href="about.html">About</a></li>
+        <div class="bottom-navbar">
 
-            <li class="dropdown">
+            <ul class="nav-links">
 
-                <a href="#">
-                    Projects
-                </a>
+                <li><a href="index.html">Home</a></li>
 
-                <ul class="dropdown-menu">
+                <li><a href="about.html">About</a></li>
 
-                    <li class="sub-dropdown">
+                <li class="dropdown">
 
-                        <a href="#">
-                            Hardware Projects
-                        </a>
+                    <a href="#">
+                        Projects
+                    </a>
 
-                        <ul class="sub-dropdown-menu">
+                    <ul class="dropdown-menu">
 
-                            <li>
-                                <a href="#">
-                                    VLSI
-                                </a>
-                            </li>
+                        <li class="sub-dropdown">
 
-                            <li>
-                                <a href="#">
-                                    Embedded
-                                </a>
-                            </li>
+                            <a href="#">
+                                Hardware Projects
+                            </a>
 
-                            <li>
-                                <a href="#">
-                                    IoT
-                                </a>
-                            </li>
+                            <ul class="sub-dropdown-menu">
 
-                        </ul>
+                                <li>
+                                    <a href="vlsi-projects.html">
+                                        VLSI
+                                    </a>
+                                </li>
 
-                    </li>
+                                <li>
+                                    <a href="embedded-projects.html">
+                                        Embedded
+                                    </a>
+                                </li>
 
-                    <li>
-                        <a href="#">
-                            Software Projects
-                        </a>
-                    </li>
+                                <li>
+                                    <a href="iot-projects.html">
+                                        IoT
+                                    </a>
+                                </li>
 
-                    <li>
-                        <a href="#">
-                            AI Projects
-                        </a>
-                    </li>
+                            </ul>
 
-                </ul>
+                        </li>
 
-            </li>
-            <li><a href="technologies.html">Latest Technologies</a></li>
-            <li><a href="gallery.html">Gallery</a></li>
-            <li><a href="reviews.html">Reviews</a></li>
-            <li><a href="contact.html">Contact Us</a></li>
-        </ul>
+                        <li>
+                            <a href="#">
+                                Software Projects
+                            </a>
+                        </li>
 
-    </nav>
+                        <li>
+                            <a href="#">
+                                AI Projects
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </li>
+
+                <li>
+                    <a href="technologies.html">
+                        Latest Technologies
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">Gallery</a>
+                </li>
+
+                <li>
+                    <a href="reviews.html">
+                        Reviews
+                    </a>
+                </li>
+
+                <li>
+                    <a href="contact.html">
+                        Contact Us
+                    </a>
+                </li>
+
+            </ul>
+
+        </div>
+
+        </nav>
+
+        <div class="user-profile"
+            id="userProfile">
+
+            <div class="profile-wrapper">
+
+                <p class="welcome-text">
+
+                    Welcome,
+
+                    <span id="profileUsername">
+
+                    </span>
+
+                </p>
+
+                <button
+                    class="menu-button"
+                    onclick="toggleMenu()">
+
+                    ☰
+
+                </button>
+
+            </div>
+
+            <div class="profile-menu"
+                id="profileMenu">
+
+                <button onclick="openChat()">
+
+                    Chat With Us
+
+                </button>
+
+                <button onclick="logout()">
+
+                    Logout
+
+                </button>
+
+            </div>
+
+        </div>
 
     <section class="hero">
 
@@ -187,6 +249,408 @@
     </footer>
 
     <script src="script.js"></script>
+
+    <div class="auth-modal"
+        id="authModal">
+
+        <!-- REGISTER -->
+
+        <form class="auth-form"
+            id="registerForm"
+            onsubmit="registerUser(event)">
+
+            <h1>Register</h1>
+
+            <input
+                type="text"
+                id="registerName"
+                placeholder="Enter Name"
+                required
+            >
+
+            <input
+                type="email"
+                id="registerEmail"
+                placeholder="Enter Gmail"
+                required
+            >
+
+            <input
+                type="password"
+                id="registerPassword"
+                placeholder="Create Password"
+                required
+            >
+
+            <p class="password-text">
+
+                Password must contain:
+                1 capital letter,
+                1 special character,
+                1 number,
+                minimum 6 characters
+
+            </p>
+
+            <button type="submit">
+
+                Register
+
+            </button>
+
+            <p>
+
+                Already Registered?
+
+                <span onclick="openLogin()">
+
+                    Login
+
+                </span>
+
+            </p>
+
+        </form>
+
+
+        <!-- LOGIN -->
+
+        <form class="auth-form"
+            id="loginForm"
+            onsubmit="loginUser(event)">
+
+            <h1>Login</h1>
+
+            <input
+                type="email"
+                id="loginEmail"
+                placeholder="Enter Gmail"
+                required
+            >
+
+            <input
+                type="password"
+                id="loginPassword"
+                placeholder="Enter Password"
+                required
+            >
+
+            <button type="submit">
+
+                Login
+
+            </button>
+
+            <p>
+
+                Forgot Password?
+
+                <span onclick="openForgot()">
+
+                    Reset
+
+                </span>
+
+            </p>
+
+            <p>
+
+                New User?
+
+                <span onclick="openRegister()">
+
+                    Register
+
+                </span>
+
+            </p>
+
+        </form>
+
+
+        <!-- FORGOT PASSWORD -->
+
+        <form class="auth-form"
+            id="forgotForm"
+            onsubmit="forgotPassword(event)">
+
+            <h1>Reset Password</h1>
+
+            <input
+                type="email"
+                id="forgotEmail"
+                placeholder="Enter Gmail"
+                required
+            >
+
+            <input
+                type="password"
+                id="forgotPassword"
+                placeholder="Enter New Password"
+                required
+            >
+
+            <p class="password-text">
+
+                Password must contain:
+                1 capital letter,
+                1 special character,
+                1 number,
+                minimum 6 characters
+
+            </p>
+
+            <button type="submit" id="changePasswordBtn">
+
+                Change Password
+
+            </button>
+
+        </form>
+
+    </div>
+
+
+    <div class="chat-box"
+        id="chatBox">
+
+        <div class="chat-header">
+
+            Chat With Admin
+
+            <button
+                onclick="closeChat()">
+
+                ✕
+
+            </button>
+
+        </div>
+
+        <div class="chat-messages">
+
+            <p>
+
+                Hello 👋
+                How can we help you?
+
+            </p>
+
+        </div>
+
+        <input
+            type="text"
+            placeholder="Type Message..."
+        >
+
+        <button>
+
+            Send
+
+        </button>
+
+    </div>
+
+
+    <div class="auth-modal"
+        id="authModal">
+
+        <!-- REGISTER -->
+
+        <form class="auth-form"
+            id="registerForm"
+            onsubmit="registerUser(event)">
+
+            <h1>Register</h1>
+
+            <input
+                type="text"
+                id="registerName"
+                placeholder="Enter Name"
+                required
+            >
+
+            <input
+                type="email"
+                id="registerEmail"
+                placeholder="Enter Gmail"
+                required
+            >
+
+            <input
+                type="password"
+                id="registerPassword"
+                placeholder="Create Password"
+                required
+            >
+
+            <p class="password-text">
+
+                Password must contain:
+                1 capital letter,
+                1 special character,
+                1 number,
+                minimum 6 characters
+
+            </p>
+
+            <button type="submit">
+
+                Register
+
+            </button>
+
+            <p>
+
+                Already Registered?
+
+                <span onclick="openLogin()">
+
+                    Login
+
+                </span>
+
+            </p>
+
+        </form>
+
+
+
+        <!-- LOGIN -->
+
+        <form class="auth-form"
+            id="loginForm"
+            onsubmit="loginUser(event)">
+
+            <h1>Login</h1>
+
+            <input
+                type="email"
+                id="loginEmail"
+                placeholder="Enter Gmail"
+                required
+            >
+
+            <input
+                type="password"
+                id="loginPassword"
+                placeholder="Enter Password"
+                required
+            >
+
+            <button type="submit">
+
+                Login
+
+            </button>
+
+            <p>
+
+                Forgot Password?
+
+                <span onclick="openForgot()">
+
+                    Reset
+
+                </span>
+
+            </p>
+
+            <p>
+
+                New User?
+
+                <span onclick="openRegister()">
+
+                    Register
+
+                </span>
+
+            </p>
+
+        </form>
+
+
+
+        <!-- FORGOT PASSWORD -->
+
+        <form class="auth-form"
+            id="forgotForm"
+            onsubmit="forgotPassword(event)">
+
+            <h1>Reset Password</h1>
+
+            <input
+                type="email"
+                id="forgotEmail"
+                placeholder="Enter Gmail"
+                required
+            >
+
+            <input
+                type="password"
+                id="forgotNewPassword"
+                placeholder="Enter New Password"
+                required
+            >
+
+            <button type="submit">
+
+                Change Password
+
+            </button>
+
+        </form>
+
+    </div>
+
+
+
+    <script src="auth.js"></script>
+
+
+    <div class="chat-box"
+        id="chatBox">
+
+        <div class="chat-header">
+
+            Chat With Admin
+
+            <button onclick="closeChat()">
+
+                ✕
+
+            </button>
+
+        </div>
+
+        <div class="chat-messages">
+
+            <p>
+
+                Hello 👋
+                How can we help you?
+
+            </p>
+
+        </div>
+
+        <input
+            type="text"
+            id="chatInput"
+            placeholder="Type Message..."
+        >
+
+        <button onclick="sendMessage()">
+
+            Send
+
+        </button>
+
+    </div>
+
+
+    
 
 </body>
 

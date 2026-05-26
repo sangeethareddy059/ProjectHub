@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>VLSI Projects</title>
+
+<link rel="stylesheet"
+      href="style.css">
+
+</head>
+
+<body>
+
+<section class="projects-section">
+
+    <h1 class="projects-title">
+
+        VLSI Projects
+
+    </h1>
+
+    <div class="projects-container"
+         id="vlsiProjects">
+
+    </div>
+
+</section>
+
+<script>
+
+async function loadVLSIProjects(){
+
+    const response = await fetch(
+
+        "http://127.0.0.1:8000/api/projects/"
+
+    );
+
+    const projects = await response.json();
+
+    const container =
+    document.getElementById(
+        "vlsiProjects"
+    );
+
+    container.innerHTML = "";
+
+    let serialNumber = 1;
+
+
+    projects.forEach(project => {
+
+        if(project.domain === "VLSI"){
+
+            container.innerHTML += `
+
+            <div class="project-card">
+
+                ${project.image
+                ? `<img src="${project.image}">`
+                : ""}
+
+                <div class="project-content">
+
+                    <h2>
+
+                        ${serialNumber}.
+                        ${project.title}
+
+                    </h2>
+
+                    <p class="tech-text">
+
+                        ${project.technologies}
+
+                    </p>
+
+                    ${project.description
+                    ? `<p>${project.description}</p>`
+                    : ""}
+
+                </div>
+
+            </div>
+
+            `;
+
+            serialNumber++;
+
+        }
+
+    });
+
+}
+
+loadVLSIProjects();
+
+</script>
+
+</body>
+
+</html>
